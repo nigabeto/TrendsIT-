@@ -1,0 +1,22 @@
+﻿using System;
+
+class URI
+{
+    static void Main(string[] args)
+    {
+        // Lê o número de casos de teste
+        int C = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < C; i++)
+        {
+            // Lê a palavra digitada para o caso de teste
+            string palavra = Console.ReadLine();
+
+            // Calcula o tempo em segundos: 0.01 segundos por letra
+            double tempo = palavra.Length * 0.01;
+
+            // Exibe o resultado formatado com 2 casas decimais
+            Console.WriteLine(tempo.ToString("F2"));
+        }
+    }
+}

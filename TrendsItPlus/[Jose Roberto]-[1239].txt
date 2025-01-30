@@ -1,0 +1,47 @@
+﻿using System;
+
+class URI
+{
+    static void Main(string[] args)
+    {
+        string linha;
+        while ((linha = Console.ReadLine()) != null)
+        {
+            bool italico = false;
+            bool negrito = false;
+
+            // Processa cada caractere da linha
+            for (int i = 0; i < linha.Length; i++)
+            {
+                char c = linha[i];
+
+                if (c == '_')
+                {
+                    // Alterna entre abrir e fechar a tag <i>
+                    if (italico)
+                        Console.Write("</i>");
+                    else
+                        Console.Write("<i>");
+                    italico = !italico;
+                }
+                else if (c == '*')
+                {
+                    // Alterna entre abrir e fechar a tag <b>
+                    if (negrito)
+                        Console.Write("</b>");
+                    else
+                        Console.Write("<b>");
+                    negrito = !negrito;
+                }
+                else
+                {
+                    // Apenas escreve o caractere
+                    Console.Write(c);
+                }
+            }
+
+            // Imprime nova linha ao final de cada caso de teste
+            Console.WriteLine();
+        }
+    }
+}

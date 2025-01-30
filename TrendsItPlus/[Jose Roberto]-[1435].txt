@@ -1,0 +1,37 @@
+﻿using System;
+
+class URI {
+
+    static void Main(string[] args) {
+        while (true) {
+            // Lê a ordem da matriz
+            int N = int.Parse(Console.ReadLine());
+            if (N == 0) break; // Condição de parada
+            // Verifica se o valor de N está dentro do limite permitido
+            if (N < 0 || N > 100) {
+                Console.WriteLine("Valor inválido. Por favor, digite um número entre 0 e 100.");
+                continue;
+            }
+
+
+            int[,] matriz = new int[N, N];
+
+            // Construção da matriz
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    matriz[i, j] = Math.Min(Math.Min(i, j), Math.Min(N - i - 1, N - j - 1)) + 1;
+                }
+            }
+
+            // Impressão da matriz
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    Console.Write($"{matriz[i, j],3}"); // Formata os números à direita
+                    if (j < N - 1) Console.Write(" "); // Adiciona espaço entre os números
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine(); // Linha em branco após cada matriz
+        }
+    }
+}

@@ -1,0 +1,43 @@
+﻿using System;
+using System.Linq;
+
+class URI {
+
+    static void Main(string[] args) { 
+
+        int N = int.Parse(Console.ReadLine()); // Lê a quantidade de casos de teste
+
+        for (int i = 0; i < N; i++)
+        {
+            string texto = Console.ReadLine().ToLower(); // Lê o texto e converte para minúsculas
+            var frequencia = new int[26]; // Array para contar a frequência de cada letra (a-z)
+
+            // Conta a frequência de cada letra no texto
+            foreach (char c in texto)
+            {
+                if (c >= 'a' && c <= 'z')
+                {
+                    frequencia[c - 'a']++;
+                }
+            }
+
+            int maxFrequencia = frequencia.Max(); // Encontra a maior frequência
+
+            // Coleta as letras com a maior frequência
+            var letrasMaisFrequentes = new System.Text.StringBuilder();
+            for (int j = 0; j < 26; j++)
+            {
+                if (frequencia[j] == maxFrequencia)
+                {
+                    letrasMaisFrequentes.Append((char)('a' + j));
+                }
+            }
+
+            // Ordena as letras em ordem alfabética (já estão em ordem, mas para garantir)
+            var letrasOrdenadas = letrasMaisFrequentes.ToString().OrderBy(c => c).ToArray();
+
+            // Imprime as letras mais frequentes
+            Console.WriteLine(new string(letrasOrdenadas));
+        }
+    }
+}

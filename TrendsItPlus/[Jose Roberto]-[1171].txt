@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class URI
+{
+    static void Main(string[] args)
+    {
+        // Lê o número de entradas
+        int N = int.Parse(Console.ReadLine());
+        
+        Dictionary<int, int> contagem = new Dictionary<int, int>();
+        
+        // Lê os números e conta suas ocorrências
+        for (int i = 0; i < N; i++)
+        {
+            int numero = int.Parse(Console.ReadLine());
+            
+            // Verifica se o número está no intervalo permitido
+            if (numero < 1 || numero > 2000)
+            {
+                Console.WriteLine("Número fora do intervalo permitido (1 ≤ X ≤ 2000). Ignorado.");
+                continue;
+            }
+            
+            if (contagem.ContainsKey(numero))
+            {
+                if (contagem[numero] >= 20)
+                {
+                    Console.WriteLine($"Número {numero} já inserido 20 vezes. Ignorado.");
+                    continue;
+                }
+                contagem[numero]++;
+            }
+            else
+            {
+                contagem[numero] = 1;
+            }
+        }
+        
+        // Ordena os números distintos em ordem crescente
+        foreach (var item in contagem.OrderBy(x => x.Key))
+        {
+            Console.WriteLine($"{item.Key} aparece {item.Value} vez(es)");
+        }
+    }
+}

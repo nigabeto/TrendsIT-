@@ -1,0 +1,78 @@
+﻿using System;
+
+class URI {
+
+    // Função para calcular o máximo divisor comum (MDC)
+    static int MDC(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+    // Função para simplificar uma fração
+    static string Simplificar(int numerador, int denominador) {
+        int mdc = MDC(Math.Abs(numerador), Math.Abs(denominador));
+        int simplificadoNum = numerador / mdc;
+        int simplificadoDen = denominador / mdc;
+
+        // Garantir que o denominador seja positivo
+        if (simplificadoDen < 0) {
+            simplificadoNum *= -1;
+            simplificadoDen *= -1;
+        }
+
+        return $"{simplificadoNum}/{simplificadoDen}";
+    }
+
+    static void Main(string[] args) { 
+
+        // Lê o número de casos de teste
+        int N = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < N; i++) {
+            // Lê a expressão
+            string[] expressao = Console.ReadLine().Split(' ');
+
+            // Extrai os valores
+            int N1 = int.Parse(expressao[0]);
+            int D1 = int.Parse(expressao[2]);
+            char operador = char.Parse(expressao[3]);
+            int N2 = int.Parse(expressao[4]);
+            int D2 = int.Parse(expressao[6]);
+
+            int numeradorResultado = 0;
+            int denominadorResultado = 0;
+
+            // Realiza a operação conforme o operador
+            switch (operador) {
+                case '+':
+                    numeradorResultado = N1 * D2 + N2 * D1;
+                    denominadorResultado = D1 * D2;
+                    break;
+                case '-':
+                    numeradorResultado = N1 * D2 - N2 * D1;
+                    denominadorResultado = D1 * D2;
+                    break;
+                case '*':
+                    numeradorResultado = N1 * N2;
+                    denominadorResultado = D1 * D2;
+                    break;
+                case '/':
+                    numeradorResultado = N1 * D2;
+                    denominadorResultado = N2 * D1;
+                    break;
+                default:
+                    throw new ArgumentException("Operador inválido.");
+            }
+
+            // Simplifica o resultado
+            string resultadoSimplificado = Simplificar(numeradorResultado, denominadorResultado);
+
+            // Exibe o resultado no formato solicitado
+            Console.WriteLine($"{numeradorResultado}/{denominadorResultado} = {resultadoSimplificado}");
+        }
+    }
+}

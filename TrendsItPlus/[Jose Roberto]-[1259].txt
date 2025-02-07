@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class URI {
+
+    static void Main(string[] args) { 
+        // Lê o valor de N
+        int N = int.Parse(Console.ReadLine());
+
+        // Verifica se N está dentro do intervalo válido
+        if (N <= 1 || N > 100000) {
+            Console.WriteLine("N deve ser um inteiro positivo no intervalo 1 < N <= 10^5.");
+            return;
+        }
+
+        // Listas para armazenar números pares e ímpares
+        List<int> pares = new List<int>();
+        List<int> impares = new List<int>();
+
+        // Lê os N números
+        for (int i = 0; i < N; i++) {
+            int numero = int.Parse(Console.ReadLine());
+
+            // Separa os números em pares e ímpares
+            if (numero % 2 == 0) {
+                pares.Add(numero);
+            } else {
+                impares.Add(numero);
+            }
+        }
+
+        // Ordena os pares em ordem crescente
+        pares.Sort();
+
+        // Ordena os ímpares em ordem decrescente
+        impares.Sort((a, b) => b.CompareTo(a));
+
+        // Exibe os números pares primeiro, seguidos pelos ímpares
+        foreach (int par in pares) {
+            Console.WriteLine(par);
+        }
+        foreach (int impar in impares) {
+            Console.WriteLine(impar);
+        }
+    }
+}

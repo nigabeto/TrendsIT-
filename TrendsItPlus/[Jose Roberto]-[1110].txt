@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+
+class URI {
+
+    static void Main(string[] args) { 
+
+        while (true) {
+            // Lê o valor de n
+            int n = int.Parse(Console.ReadLine());
+
+            // Se n for 0, encerra o programa
+            if (n == 0) {
+                break;
+            }
+
+            // Verifica se n está no intervalo válido (1 ≤ n ≤ 50)
+            if (n < 1 || n > 50) {
+                Console.WriteLine("Erro: n deve estar no intervalo 1 ≤ n ≤ 50.");
+                continue; // Pula para o próximo caso de teste
+            }
+
+            // Cria uma fila para simular a pilha de cartas
+            Queue<int> cartas = new Queue<int>();
+
+            // Preenche a fila com as cartas de 1 a n
+            for (int i = 1; i <= n; i++) {
+                cartas.Enqueue(i);
+            }
+
+            // Lista para armazenar as cartas descartadas
+            List<int> descartadas = new List<int>();
+
+            // Processa as cartas até sobrar apenas uma
+            while (cartas.Count > 1) {
+                // Descarta a carta do topo
+                descartadas.Add(cartas.Dequeue());
+
+                // Move a próxima carta para o final da fila
+                cartas.Enqueue(cartas.Dequeue());
+            }
+
+            // Imprime as cartas descartadas
+            Console.Write("Discarded cards: ");
+            for (int i = 0; i < descartadas.Count; i++) {
+                Console.Write(descartadas[i]);
+                if (i < descartadas.Count - 1) {
+                    Console.Write(", ");
+                }
+            }
+            Console.WriteLine();
+
+            // Imprime a carta restante
+            Console.WriteLine("Remaining card: " + cartas.Dequeue());
+        }
+    }
+}

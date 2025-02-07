@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+
+class URI {
+
+    static void Main(string[] args) { 
+
+        // Lê o número de casos de teste
+        int N = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < N; i++) {
+            // Lê a string de entrada
+            string entrada = Console.ReadLine();
+
+            // Verifica se a string tem até 1000 caracteres
+            if (entrada.Length > 1000) {
+                Console.WriteLine("Erro: A entrada excede o limite de 1000 caracteres.");
+                continue; // Pula para o próximo caso de teste
+            }
+
+            // Remove todas as partículas de areia '.' da string
+            string filtrada = entrada.Replace(".", "");
+
+            // Usa uma pilha para contar os diamantes
+            Stack<char> pilha = new Stack<char>();
+            int diamantes = 0;
+
+            // Percorre a string filtrada
+            foreach (char c in filtrada) {
+                if (c == '<') {
+                    // Empilha '<'
+                    pilha.Push(c);
+                }
+                else if (c == '>') {
+                    // Se encontrar '>' e houver '<' na pilha, forma um diamante
+                    if (pilha.Count > 0 && pilha.Peek() == '<') {
+                        pilha.Pop(); // Remove o '<' da pilha
+                        diamantes++; // Incrementa a contagem de diamantes
+                    }
+                }
+            }
+
+            // Imprime a quantidade de diamantes para o caso de teste atual
+            Console.WriteLine(diamantes);
+        }
+    }
+}

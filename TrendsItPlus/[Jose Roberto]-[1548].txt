@@ -1,0 +1,48 @@
+﻿using System;
+using System.Linq;
+
+class URI {
+
+    static void Main(string[] args) { 
+        // Lê o número de casos de teste
+        int N = int.Parse(Console.ReadLine());
+
+        // Processa cada caso de teste
+        for (int i = 0; i < N; i++) {
+            // Lê o número de alunos
+            int M = int.Parse(Console.ReadLine());
+
+            // Verifica se M está dentro do intervalo válido
+            if (M < 1 || M > 1000) {
+                Console.WriteLine("M deve estar no intervalo 1 ≤ M ≤ 1000.");
+                return;
+            }
+
+            // Lê as notas dos alunos
+            int[] notas = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+
+            // Verifica se todas as notas estão dentro do intervalo válido
+            if (notas.Any(p => p < 1 || p > 1000)) {
+                Console.WriteLine("As notas devem estar no intervalo 1 ≤ Pi ≤ 1000.");
+                return;
+            }
+
+            // Armazena as notas com suas posições originais
+            var alunos = notas.Select((nota, indice) => new { Nota = nota, PosicaoOriginal = indice }).ToArray();
+
+            // Ordena os alunos por nota em ordem decrescente
+            var alunosOrdenados = alunos.OrderByDescending(a => a.Nota).ToArray();
+
+            // Conta quantos alunos permaneceram na mesma posição
+            int contador = 0;
+            for (int j = 0; j < M; j++) {
+                if (alunosOrdenados[j].PosicaoOriginal == j) {
+                    contador++;
+                }
+            }
+
+            // Exibe o resultado
+            Console.WriteLine(contador);
+        }
+    }
+}

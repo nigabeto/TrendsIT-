@@ -1,0 +1,24 @@
+﻿using System;
+
+class URI {
+
+    static int numCalls;
+
+    static int Fibonacci(int n) {
+        numCalls++;
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        return Fibonacci(n - 1) + Fibonacci(n - 2);
+    }
+
+    static void Main(string[] args) { 
+        int N = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < N; i++) {
+            int X = int.Parse(Console.ReadLine());
+            numCalls = 0;
+            int result = Fibonacci(X);
+            Console.WriteLine($"fib({X}) = {numCalls - 1} calls = {result}");
+        }
+    }
+}

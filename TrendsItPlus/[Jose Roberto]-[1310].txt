@@ -1,0 +1,48 @@
+﻿using System;
+
+class URI {
+    static void Main(string[] args) {
+        while (true) {
+            // Verifica se há mais entradas (EOF)
+            string input = Console.ReadLine();
+            if (string.IsNullOrEmpty(input)) break; // Finaliza o programa se a entrada for vazia
+
+            // Lê o número de dias (N)
+            int N = int.Parse(input);
+            if (N < 1 || N > 50) {
+                Console.WriteLine("N deve estar entre 1 e 50.");
+                continue;
+            }
+
+            // Lê o custo diário
+            int custoPorDia = int.Parse(Console.ReadLine());
+            
+
+            // Lê as receitas diárias
+            int[] receitas = new int[N];
+            for (int i = 0; i < N; i++) {
+                receitas[i] = int.Parse(Console.ReadLine());
+                
+            }
+
+            // Calcula o lucro máximo
+            int lucroMaximo = 0;
+            int lucroAtual = 0;
+
+            for (int i = 0; i < N; i++) {
+                lucroAtual += receitas[i] - custoPorDia;
+
+                if (lucroAtual < 0) {
+                    lucroAtual = 0; // Reinicia o lucro atual se for negativo
+                }
+
+                if (lucroAtual > lucroMaximo) {
+                    lucroMaximo = lucroAtual; // Atualiza o lucro máximo
+                }
+            }
+
+            // Imprime o resultado
+            Console.WriteLine(lucroMaximo);
+        }
+    }
+}

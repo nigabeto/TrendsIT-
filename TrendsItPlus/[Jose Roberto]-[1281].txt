@@ -1,0 +1,69 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+
+class URI
+{
+    static void Main(string[] args)
+    {
+        // Define a cultura para usar ponto como separador decimal
+        CultureInfo culture = new CultureInfo("en-US");
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+        // Lê o número de idas à feira (casos de teste)
+        int N = int.Parse(Console.ReadLine());
+
+        // Loop para cada caso de teste
+        for (int i = 0; i < N; i++)
+        {
+            // Lê a quantidade de produtos disponíveis na feira
+            int M = int.Parse(Console.ReadLine());
+
+            // Dicionário para armazenar os produtos e seus preços
+            Dictionary<string, double> produtos = new Dictionary<string, double>();
+
+            // Lê os M produtos e seus preços
+            for (int j = 0; j < M; j++)
+            {
+                string[] produtoInfo = Console.ReadLine().Split(' ');
+                string nome = produtoInfo[0];
+                double preco = double.Parse(produtoInfo[1], CultureInfo.InvariantCulture); // Usa ponto como separador decimal
+                produtos[nome] = preco;
+            }
+
+            // Lê a quantidade de produtos que Dona Parcinova deseja comprar
+            int P = int.Parse(Console.ReadLine());
+
+            // Valida a condição 1 ≤ P ≤ M
+            if (P < 1 || P > M)
+            {
+                Console.WriteLine("Erro: P deve estar entre 1 e M.");
+                continue;
+            }
+
+            double total = 0;
+
+            // Lê os P produtos que Dona Parcinova deseja comprar e calcula o total
+            for (int j = 0; j < P; j++)
+            {
+                string[] compraInfo = Console.ReadLine().Split(' ');
+                string nome = compraInfo[0];
+                int quantidade = int.Parse(compraInfo[1]);
+
+                // Verifica se o produto existe no dicionário
+                if (produtos.ContainsKey(nome))
+                {
+                    total += produtos[nome] * quantidade;
+                }
+                else
+                {
+                    Console.WriteLine($"Erro: Produto '{nome}' não encontrado.");
+                }
+            }
+
+            // Imprime o valor total no formato solicitado
+            Console.WriteLine($"R$ {total.ToString("F2", CultureInfo.InvariantCulture)}");
+        }
+    }
+}
